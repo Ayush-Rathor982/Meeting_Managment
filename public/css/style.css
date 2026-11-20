@@ -1,0 +1,1004 @@
+/* * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #fff;
+}
+
+.container {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+Meeting time slots
+.time-slots {
+    width: 140px;
+}
+
+.slot {
+    width: 135px;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #aaaaff;
+    background: white;
+    color: #333399;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+}
+
+.slot:hover {
+    background: #eeeeff;
+}
+
+.available {
+    display: block;
+    margin-top: 4px;
+    color: green;
+    font-size: 11px;
+}
+
+Meetings section
+.meetings-section {
+    flex: 1;
+    text-align: center;
+}
+
+.meetings-btn {
+    padding: 10px 25px;
+    background: #087cf0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.meetings-btn:hover {
+    background: #005fc4;
+}
+
+h3 {
+    margin-top: 40px;
+}
+
+Booking form
+.form-container {
+    display: none;
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #a8e6d8;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.form-container.show {
+    display: block;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container button {
+    padding: 10px 20px;
+    background: #087cf0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.scheduled-meetings {
+    margin-top: 40px;
+}
+
+.scheduled-meetings ul {
+    list-style: none;
+    padding: 0;
+}
+
+.scheduled-meetings li {
+    padding: 10px;
+    margin: 8px auto;
+    max-width: 350px;
+    background: #f2f5f9;
+    border-radius: 5px;
+}
+
+
+
+
+#meetingList {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 450px;
+    margin: 25px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.meeting-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    margin-bottom: 15px;
+    background: white;
+    border-radius: 10px;
+    border-left: 5px solid #4f46e5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    gap: 15px;
+}
+
+.meeting-details h3 {
+    margin: 0 0 8px;
+    color: #333;
+}
+
+.meeting-details p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}
+
+@media (max-width: 480px) {
+    .meeting-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+ */
+
+
+ 
+
+
+
+
+/* =========================================
+   1. GLOBAL STYLES
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: clamp(14px, 0.9vw, 17px);
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f8ff;
+    color: #171b3b;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================================
+   2. HEADER
+========================================= */
+
+.header {
+    background: white;
+    border-bottom: 1px solid #e7e8ff;
+    padding: clamp(12px, 1.5vw, 24px) 4%;
+}
+
+.header-content {
+    width: 100%;
+    margin: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1vw, 18px);
+}
+
+.logo-icon {
+    width: clamp(40px, 4vw, 60px);
+    height: clamp(40px, 4vw, 60px);
+
+    background: linear-gradient(135deg, #6255f5, #4033d6);
+    color: white;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-weight: bold;
+
+    flex-shrink: 0;
+}
+
+.logo h1 {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    margin-bottom: 5px;
+}
+
+.logo p {
+    color: #73789b;
+    font-size: clamp(0.75rem, 1vw, 0.95rem);
+}
+
+.header-info {
+    color: #777b9d;
+    font-size: clamp(0.75rem, 1vw, 0.95rem);
+}
+
+
+/* =========================================
+   3. MAIN CONTAINER
+========================================= */
+
+.container {
+    width: 100%;
+
+    margin: clamp(15px, 2vw, 32px) auto;
+    padding: 0 4%;
+}
+
+
+/* =========================================
+   4. BOOKING LAYOUT
+========================================= */
+
+.booking-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 2fr)
+        minmax(0, 8fr);
+
+    gap: clamp(12px, 1.5vw, 24px);
+
+    align-items: stretch;
+}
+
+
+/* =========================================
+   5. AVAILABLE TIME SLOTS
+========================================= */
+
+.time-slots {
+    background: white;
+
+    border: 1px solid #e7e8ff;
+    border-radius: clamp(10px, 1vw, 16px);
+
+    padding: clamp(12px, 1.5vw, 22px);
+
+    height: 70dvh;
+    min-height: 350px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    position: sticky;
+    top: 2vh;
+
+    box-shadow: 0 4px 15px rgba(70, 65, 160, 0.05);
+
+    /* Hide scrollbar but preserve scrolling */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.time-slots::-webkit-scrollbar {
+    display: none;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+
+    gap: clamp(8px, 1vw, 12px);
+
+    margin-bottom: clamp(15px, 1.5vw, 22px);
+}
+
+.section-heading h2 {
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    font-weight: 650;
+}
+
+.heading-icon {
+    color: #5145e5;
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+}
+
+
+/* Time slot buttons */
+
+.slot {
+    width: 100%;
+
+    padding: clamp(10px, 1.1vw, 16px);
+
+    margin-bottom: clamp(8px, 0.8vw, 13px);
+
+    background: white;
+
+    border: 1px solid #e5e6f7;
+    border-radius: 12px;
+
+    text-align: left;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.slot:last-child {
+    margin-bottom: 0;
+}
+
+.slot:hover {
+    background: #f5f4ff;
+    border-color: #8176fa;
+    transform: translateY(-2px);
+}
+
+.slot.selected {
+    background: #eeedff;
+    border: 1.5px solid #6255f5;
+    border-left: 5px solid #5145e5;
+}
+
+.slot-time {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    font-weight: 600;
+    color: #171b3b;
+}
+
+.available {
+    color: #15945b;
+    font-size: clamp(0.75rem, 0.9vw, 0.9rem);
+}
+
+
+/* =========================================
+   6. BOOKING PANEL
+========================================= */
+
+.booking-panel {
+    background: white;
+
+    border: 1px solid #e7e8ff;
+    border-radius: 16px;
+
+    min-height: 45dvh;
+
+    padding: clamp(15px, 2vw, 30px);
+
+    box-shadow: 0 4px 15px rgba(70, 65, 160, 0.05);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    display: none;
+    width: 100%;
+}
+
+.form-container.show {
+    display: block;
+}
+
+
+/* Form header */
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: clamp(18px, 2vw, 28px);
+
+    gap: 15px;
+}
+
+.form-header h2 {
+    font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+    margin-bottom: 7px;
+}
+
+.form-header p {
+    color: #8589a7;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+.close-btn {
+    width: clamp(32px, 2.5vw, 42px);
+    height: clamp(32px, 2.5vw, 42px);
+
+    flex-shrink: 0;
+
+    border: none;
+    background: #f2f1ff;
+
+    color: #5145e5;
+
+    border-radius: 10px;
+
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    background: #e4e1ff;
+}
+
+
+/* =========================================
+   7. SELECTED TIME
+========================================= */
+
+.selected-time {
+    display: flex;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: clamp(8px, 1vw, 12px);
+
+    padding: clamp(10px, 1vw, 15px);
+
+    margin-bottom: clamp(15px, 2vw, 25px);
+
+    background: #f0efff;
+    border-radius: 10px;
+
+    color: #5b5f8d;
+
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+}
+
+.selected-time span:first-child {
+    color: #5145e5;
+    font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+}
+
+.selected-time strong {
+    color: #5145e5;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+}
+
+
+/* =========================================
+   8. FORM INPUTS
+========================================= */
+
+.form-fields {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: clamp(12px, 2vw, 25px);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.form-group label {
+    font-size: clamp(0.85rem, 1vw, 1rem);
+    font-weight: 600;
+}
+
+.form-group input, #time {
+    width: 100%;
+
+    padding: clamp(10px, 1vw, 15px);
+
+    border: 1px solid #dcdcf0;
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: clamp(0.85rem, 1vw, 1rem);
+
+    color: #171b3b;
+
+    transition: border 0.2s;
+}
+
+#time{
+    width: 50%;
+    margin-top: 10px;
+}
+
+.form-group input:focus {
+    border-color: #6255f5;
+    box-shadow: 0 0 0 3px rgba(98, 85, 245, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #a0a3bc;
+}
+
+
+/* =========================================
+   9. BOOK BUTTON
+========================================= */
+
+.book-btn {
+    display: block;
+
+    width: min(55%, 400px);
+    min-width: 180px;
+
+    margin: clamp(20px, 2vw, 30px) auto 0;
+
+    padding: clamp(10px, 1vw, 16px);
+
+    background: linear-gradient(135deg, #6255f5, #4033d6);
+
+    color: white;
+
+    border: none;
+    border-radius: 11px;
+
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 15px rgba(81, 69, 229, 0.25);
+}
+
+.book-btn span {
+    margin-left: 8px;
+}
+
+
+/* =========================================
+   10. BOOKING PLACEHOLDER
+========================================= */
+
+.booking-placeholder {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: clamp(20px, 3vw, 35px);
+
+    min-height: 280px;
+}
+
+.placeholder-icon {
+    width: clamp(55px, 5vw, 75px);
+    height: clamp(55px, 5vw, 75px);
+
+    border-radius: 20px;
+
+    background: #eeedff;
+    color: #5145e5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+
+    margin-bottom: 20px;
+}
+
+.booking-placeholder h2 {
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    margin-bottom: 10px;
+}
+
+.booking-placeholder p {
+    color: #8589a7;
+
+    max-width: 350px;
+
+    line-height: 1.6;
+
+    font-size: clamp(0.8rem, 1vw, 1rem);
+}
+
+
+/* =========================================
+   11. SCHEDULED MEETINGS
+========================================= */
+
+.scheduled-meetings {
+    margin-top: clamp(20px, 2.5vw, 40px);
+
+    background: white;
+
+    padding: clamp(15px, 2vw, 30px);
+
+    border: 1px solid #e7e8ff;
+    border-radius: 16px;
+
+    box-shadow: 0 4px 15px rgba(70, 65, 160, 0.05);
+}
+
+.meetings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.meetings-header .section-heading {
+    margin-bottom: 20px;
+}
+
+.meeting-label {
+    color: #5145e5;
+    background: #eeedff;
+
+    padding: 9px 15px;
+
+    border-radius: 20px;
+
+    font-size: clamp(0.75rem, 0.9vw, 0.9rem);
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   12. MEETING LIST
+========================================= */
+
+#meetingList {
+    list-style: none;
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    /* justify-content: space-between; */
+
+    /* grid-template-columns: repeat(2, minmax(0, 1fr)); */
+
+    gap: 30px;
+
+    margin-top: 5px;
+}
+
+
+/* Individual meeting card */
+
+.meeting-card {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+
+    gap: clamp(8px, 1vw, 15px);
+
+    padding: clamp(12px, 1.5vw, 22px);
+
+    background: #fafaff;
+
+    border: 1px solid #e7e8ff;
+    border-left: 5px solid #6255f5;
+
+    border-radius: 12px;
+
+    transition: all 0.2s ease;
+
+    min-width: 30%;
+}
+
+.meeting-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(70, 65, 160, 0.1);
+}
+
+.meeting-details {
+    flex: 1;
+    min-width: 0;
+    /* margin: 2px 2px; */
+    gap: 5px;
+}
+
+.meeting-details h2 {
+    margin: 0 0 25px 9px;
+
+    /* font-size: clamp(0.95rem, 1.3vw, 1.2rem); */
+    font-size: 1.6rem;
+
+
+    color: #171b3b;
+}
+
+.meeting-details p {
+    margin: 6px 0;
+
+    color: #73789b;
+
+    font-size: 1.3rem;
+
+    margin : 8px auto;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* Delete button */
+
+.delete-btn, .edit-btn {
+    background: #fff0f1;
+    color: #e23b51;
+
+    border: 1px solid #ffcbd1;
+
+    padding: clamp(7px, 0.8vw, 12px)
+             clamp(10px, 1vw, 16px);
+
+    border-radius: 25px;
+
+    margin: auto 10px;
+
+    margin-top: 25px;
+
+    padding: 10px 25px;
+
+
+    cursor: pointer;
+
+    /* font-size: clamp(0.75rem, 0.9vw, 0.9rem); */
+    font-size: 1.1rem;
+
+    font-weight: bold;
+
+    flex-shrink: 0;
+
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #e23b51;
+    color: white;
+}
+
+
+/* =========================================
+   13. LARGE DESKTOP SCREENS
+========================================= */
+
+/* @media (min-width: 1600px) {
+
+    .container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .booking-layout {
+        grid-template-columns:
+            minmax(260px, 2fr)
+            minmax(0, 8fr);
+    }
+
+} */
+
+
+/* =========================================
+   14. TABLETS AND SMALL LAPTOPS
+========================================= */
+
+@media (max-width: 900px) {
+
+    .booking-layout {
+        grid-template-columns:
+            minmax(200px, 3fr)
+            minmax(0, 7fr);
+    }
+
+    .form-fields {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #meetingList {
+        grid-template-columns: 1fr;
+    }
+
+    .header-info {
+        display: none;
+    }
+
+}
+
+
+/* =========================================
+   15. MOBILE SCREENS
+========================================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 0 3%;
+    }
+
+    .booking-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .time-slots {
+        height: 35dvh;
+        min-height: 200px;
+
+        position: static;
+    }
+
+    .booking-panel {
+        min-height: 300px;
+    }
+
+    .form-fields {
+        grid-template-columns: 1fr;
+    }
+
+    #meetingList {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================
+   16. SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 480px) {
+
+    .header {
+        padding: 12px 15px;
+    }
+
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .booking-panel {
+        padding: 18px;
+    }
+
+    .form-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .book-btn {
+        width: 100%;
+    }
+
+    .scheduled-meetings {
+        padding: 15px;
+    }
+
+    .meetings-header {
+        align-items: flex-start;
+    }
+
+    .meeting-label {
+        display: none;
+    }
+
+    .meeting-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .delete-btn {
+        align-self: flex-end;
+    }
+
+}
+
+
+/* =========================================
+   17. VERY SMALL SCREENS
+========================================= */
+
+@media (max-width: 350px) {
+
+    .logo-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo h1 {
+        font-size: 1rem;
+    }
+
+    .logo p {
+        font-size: 0.7rem;
+    }
+
+    .section-heading h2 {
+        font-size: 0.95rem;
+    }
+
+}

@@ -1,0 +1,323 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Expense-Tracker</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        Available time slots
+        <div class="time-slots">
+
+            <button class="slot" id="b1" data-available="4"
+                onclick="selectTime('2:00:00', 'b1')">
+                2:00 PM
+                <span class="available">4 Available</span>
+            </button>
+
+            <button class="slot" id="b2" data-available="4"
+                onclick="selectTime('2:30:00', 'b2')">
+                2:30 PM
+                <span class="available">4 Available</span>
+            </button>
+
+            <button class="slot" id="b3" data-available="4"
+                onclick="selectTime('3:00:00', 'b3')">
+                3:00 PM
+                <span class="available">4 Available</span>
+            </button>
+
+            <button class="slot" id="b4" data-available="4"
+                onclick="selectTime('3:30:00', 'b4')">
+                3:30 PM
+                <span class="available">4 Available</span>
+            </button>
+
+        </div>
+
+
+        Meetings section
+        <div class="meetings-section">
+
+            <button class="meetings-btn" onclick="toggleForm()">
+                Meetings
+            </button>
+
+            Booking Form
+            <div class="form-container" id="bookingForm">
+
+                <form onsubmit="bookMeeting(event)">
+
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+
+                    <input type="text" id="time"  required  style="display: none;">
+                    <input type="text" id="slotId" required  style="display: none;">
+
+                    <button type="submit">Book</button>
+
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+
+    Scheduled meetings
+    <div class="scheduled-meetings">
+        <h3>Scheduled meetings</h3>
+        <ul id="meetingList"></ul>
+    </div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/index.js"></script>
+
+</html>
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meeting Scheduler</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">✓</div>
+                <div>
+                    <h1>Meeting Scheduler</h1>
+                    <p>Book the meetings easily</p>
+                </div>
+            </div>
+
+            <div class="header-info">
+                <span>Manage your schedule properly</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Booking section -->
+        <section class="booking-layout">
+
+            <!-- Available slots -->
+            <div class="time-slots">
+
+                <div class="section-heading">
+                    <span class="heading-icon">▣</span>
+                    <h2>Available Slots</h2>
+                </div>
+
+                <button class="slot" id="02:00:00"
+                    data-available="4"
+                    onclick="selectTime('02:00:00')">
+
+                    <span class="slot-time">2:00 PM</span>
+                    <span class="available">● 4 Available</span>
+                </button>
+
+                <button class="slot" id="02:30:00"
+                    data-available="4"
+                    onclick="selectTime('02:30:00')">
+
+                    <span class="slot-time">2:30 PM</span>
+                    <span class="available">● 4 Available</span>
+                </button>
+
+                <button class="slot" id="03:00:00"
+                    data-available="4"
+                    onclick="selectTime('03:00:00')">
+
+                    <span class="slot-time">3:00 PM</span>
+                    <span class="available">● 4 Available</span>
+                </button>
+
+                <button class="slot" id="03:30:00"
+                    data-available="4"
+                    onclick="selectTime('03:30:00')">
+
+                    <span class="slot-time">3:30 PM</span>
+                    <span class="available">● 4 Available</span>
+                </button>
+                <button class="slot" id="04:00:00"
+                    data-available="4"
+                    onclick="selectTime('04:00:00')">
+
+                    <span class="slot-time">4:00 PM</span>
+                    <span class="available">● 4 Available</span>
+                </button>
+                <button class="slot" id="04:30:00"
+                    data-available="4"
+                    onclick="selectTime('04:30:00')">
+
+                    <span class="slot-time">4:30 PM</span>
+                    <span class="available">● 4 Available</span>
+                </button>
+
+            </div>
+
+
+            <!-- Booking form -->
+            <div class="booking-panel">
+
+                <div class="form-container" id="bookingForm">
+
+                    <div class="form-header">
+                        <div>
+                            <h2>Book a Meeting</h2>
+                            <p>Fill in your details to confirm your meeting</p>
+                        </div>
+
+                        <button type="button"
+                            class="close-btn"
+                            onclick="closeBookingForm()">
+                            &times;
+                        </button>
+                    </div>
+
+                    <div class="selected-time">
+                        <span>◷</span>
+                        <span>Selected Time:</span>
+                        <strong id="selectedTimeText">Select a slot</strong>
+                    </div>
+
+                    <form onsubmit="bookMeeting(event)">
+
+                        <div class="form-fields">
+
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    placeholder="Enter your name"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    placeholder="Enter your email"
+                                    required>
+                            </div>
+
+                        </div>
+
+                        <!-- Hidden fields retained for existing JS -->
+                        <input type="hidden" id="time" placeholder="Enter the time" required>
+                        <!-- <input type="hidden" id="slotId"> -->
+
+                        <button type="submit" class="book-btn">
+                            Book Meeting <span>→</span>
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <div class="booking-placeholder" id="bookingPlaceholder">
+                    <div class="placeholder-icon">▣</div>
+                    <h2>Schedule a Meeting</h2>
+                    <p>Select an available time slot from the left to book your meeting.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Scheduled meetings -->
+        <section class="scheduled-meetings">
+
+            <div class="meetings-header">
+                <div class="section-heading">
+                    <span class="heading-icon">▣</span>
+                    <h2>Scheduled Meetings</h2>
+                </div>
+
+                <span class="meeting-label">Your Bookings</span>
+            </div>
+
+            <ul id="meetingList">
+                <!-- Meeting cards will be dynamically inserted here -->
+            </ul>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/index.js"></script>
+
+    <script>
+        // function closeBookingForm() {
+        //     document.getElementById("bookingForm").classList.remove("show");
+        //     document.getElementById("bookingPlaceholder").style.display = "flex";
+
+        //     document.querySelectorAll(".slot").forEach(slot => {
+        //         slot.classList.remove("selected");
+        //     });
+        // }
+
+        // Update the selected time display when a slot is clicked.
+        // const originalSelectTime = window.selectTime;
+
+        // Keep the existing selectTime function from index.js.
+        // The display is updated through the hidden time input.
+        // document.querySelectorAll(".slot").forEach(slot => {
+        //     slot.addEventListener("click", () => {
+        //         setTimeout(() => {
+        //             const time = document.getElementById("time").value;
+
+        //             if (time) {
+        //                 document.getElementById("selectedTimeText").textContent =
+        //                     new Date("1970-01-01T" + time).toLocaleTimeString(
+        //                         "en-US",
+        //                         { hour: "numeric", minute: "2-digit" }
+        //                     );
+
+        //                 document.getElementById("bookingPlaceholder").style.display = "none";
+        //             }
+
+        //             document.querySelectorAll(".slot").forEach(item => {
+        //                 item.classList.remove("selected");
+        //             });
+
+        //             slot.classList.add("selected");
+        //         }, 0);
+        //     });
+        // });
+    </script>
+
+</body>
+</html>
+
